@@ -1,3 +1,5 @@
+
+/* Image uploader for theme option main logo */
 jQuery(document).ready(function($){
     $('#upload-btn ,#preview_header_logo').click(function(e) {
 		e.preventDefault();
@@ -5,7 +7,7 @@ jQuery(document).ready(function($){
             title: 'Upload Image',
             // mutiple: true if you want to upload multiple files at once
             multiple: false
-        }).open()
+		}).open()
         .on('select', function(e){
             // This will return the selected image from the Media Uploader, the result is an object
             var uploaded_image = image.state().get('selection').first();
@@ -16,10 +18,10 @@ jQuery(document).ready(function($){
             // Let's assign the url value to the input field
             $('.nomagic-logo-upload-btn').val(nomagic_header_logo);
 			$('#preview_header_logo').attr("src", nomagic_header_logo);
-        });
-    });
-	 $('#remove-btn').click(function(e) {
-		  $('.nomagic-logo-upload-btn').val('');
-		  $('#preview_header_logo').attr("src",'');
-	 });
+		});
+	});
+	$('#remove-btn').click(function(e) {
+		$('.nomagic-logo-upload-btn').val('');
+		$('#preview_header_logo').attr("src",'');
+	});
 });

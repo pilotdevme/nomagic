@@ -1,8 +1,10 @@
 <?php
-	
+	/**
+		* The nomagic function file
+	*/
+?>
 
-	//require_once(TEMPLATEPATH . '/functions/admin-menu.php');//add theme options file
- 	
+<?php
 	/* Add style sheets and js */
 	function nomagic_wordpress_resources(){
 		
@@ -28,9 +30,9 @@
 		
 		/*Adding diff layout for the wordpress posts */
 		add_theme_support('post-formats', array('aside', 'gallery', 'link'));	
-		
-		/* Add featured image support */
-		add_theme_support('post-thumbnails');
+	
+	/* Add featured image support */
+	add_theme_support('post-thumbnails');
 	}
 	add_action('after_setup_theme','nomagicwordpress_setup');
 	
@@ -114,11 +116,9 @@
 	add_filter('excerpt_length', 'custom_excerpt_length');
 	
 	/* Add theme options menu*/
-	function add_theme_menu_item()
-	{
+	function add_theme_menu_item(){
 		add_menu_page("Theme Panel", "Theme Panel", "manage_options", "theme-panel", "theme_settings_page", null, 99);
 	}
-	
 	add_action("admin_menu", "add_theme_menu_item");
 	
 	/* Theme options Settings page*/
@@ -146,16 +146,13 @@
 				global $options;
 				
 				$options = get_option( 'nomagic_theme_options' );
-								
+				
 			?> 
 		</form>
 	</div>
 	<?php
 	}
-	
-	
-	function display_theme_panel_fields()
-	{
+	function display_theme_panel_fields(){
 		add_settings_section("section", "All Settings", null, "theme-options");
 		register_setting( "section", 'nomagic_theme_options');	
 		/* Adding Social links to theme*/	
@@ -177,20 +174,15 @@
 	}
 	add_action("admin_init", "display_theme_panel_fields");
 	
-	
-	function add_nomagic_footer_element()
-	{	
-		
+	function add_nomagic_footer_element(){	
 	?>
 	<textarea cols="50" name="nomagic_theme_options[nomagic_footer]" id="nomagic_theme_options[nomagic_footer]" rows="4" style="background: none repeat scroll 0% 0% height: 100px; margin: 0pt auto; padding: 5px; width: 382px;"><?php  $options = get_option( 'nomagic_theme_options' ); echo $options['nomagic_footer']; ?></textarea>
     <?php
 	}
-	function add_nomagic_header_logo_element()
-	{	
-	wp_enqueue_script('jquery');
+	function add_nomagic_header_logo_element(){	
+		wp_enqueue_script('jquery');
 		// This will enqueue the Media Uploader script
 		wp_enqueue_media();
-		
 	?>
     <div>
 		<input type="text" name="nomagic_theme_options[header_logo]" id="nomagic_theme_options[header_logo]" class="regular-text nomagic-logo-upload-btn" value="<?php  $options = get_option( 'nomagic_theme_options' ); echo $options['header_logo']; ?>">
@@ -198,13 +190,12 @@
 		<input type="button" name="remove-btn" id="remove-btn" class="button-secondary" value="Remove Image">
 		
 	</div>
-	
 	<?php
-	preview_header_logo();
+		preview_header_logo();
 	}
 	function preview_header_logo(){
 	?>
-	 <a href=""><img id="preview_header_logo" name="preview_header_logo" src="<?php  $options = get_option( 'nomagic_theme_options' ); echo $options['header_logo']; ?>" alt="" height="100" width="100"> </a>
+	<a href=""><img id="preview_header_logo" name="preview_header_logo" src="<?php  $options = get_option( 'nomagic_theme_options' ); echo $options['header_logo']; ?>" alt="" height="100" width="100"> </a>
 	<?php
 	}
 	function add_nomagic_custom_js_element(){
@@ -222,52 +213,34 @@
 	add_action( 'template_redirect', 'nomagic_theme_js_print_js' );
 	
 	function nomagic_theme_js_print_js() {
-	include_once ($dir_path.'/js/custom-js.php');
+		include_once ($dir_path.'/js/custom-js.php');
 	}
 	function nomagic_theme_custom_print_css() {
-	include_once ($dir_path.'/css/custom_css.php');
+		include_once ($dir_path.'/css/custom_css.php');
 	}
-
-	function display_instagram_element()
-	{	
+	function display_instagram_element(){	
 	?>
 	<input type="text" name="nomagic_theme_options[instagram_url]" id="nomagic_theme_options[instagram_url]" value="<?php  $options = get_option( 'nomagic_theme_options' ); echo $options['instagram_url']; ?>" />
     <?php
 	}
-	function display_pinteres_element()
-	{	
+	function display_pinteres_element(){	
 	?>
 	<input type="text" name="nomagic_theme_options[pinteres_url]" id="nomagic_theme_options[pinteres_url]" value="<?php  $options = get_option( 'nomagic_theme_options' ); echo $options['pinteres_url']; ?>" />
     <?php
 	}
-	
-	function display_twitter_element()
-	{
+	function display_twitter_element(){
 	?>
 	<input type="text" name="nomagic_theme_options[twitter_url]" id="nomagic_theme_options[twitter_url]" value="<?php  $options = get_option( 'nomagic_theme_options' ); echo $options['twitter_url']; ?>" />
     <?php
 	}
-	
-	function display_facebook_element()
-	{
+	function display_facebook_element(){
 	?>
 	<input type="text" name="nomagic_theme_options[facebook_url]" id="nomagic_theme_options[facebook_url]" value="<?php  $options = get_option( 'nomagic_theme_options' ); echo $options['facebook_url']; ?>" />
     <?php
 	}
-	function display_youtube_element()
-	{
+	function display_youtube_element(){
 	?>
 	<input type="text" name="nomagic_theme_options[youtube_url]" id="nomagic_theme_options[youtube_url]" value="<?php  $options = get_option( 'nomagic_theme_options' ); echo $options['youtube_url']; ?>" />
     <?php
 	}
-	
-/*function theme_name_scripts() {
-		//include_once ($dir_path.'/css/custom_css.php');
-		wp_enqueue_script( 'custom_css', $dir_path.'/css/custom_css.php', array(), true );
-}
-
-add_action( 'wp_enqueue_scripts', 'theme_name_scripts' );
-*/	
 ?>
-
-

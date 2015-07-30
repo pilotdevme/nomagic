@@ -1,8 +1,7 @@
 <?php
-/**
-	* The template for displaying posts in the Aside post format
- * @since nomagic 1.0
- */
+	/**
+		* The template for displaying posts in the Aside post format
+	*/
 ?>
 
 <article class="post post-aside">
